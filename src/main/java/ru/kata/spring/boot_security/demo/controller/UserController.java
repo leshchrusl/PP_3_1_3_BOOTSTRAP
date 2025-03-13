@@ -20,8 +20,8 @@ public class UserController {
     }
 
     @GetMapping("")
-    public String userGet(Principal principal, Model model) {
-        model.addAttribute("usergetter", userService.findByUsername(principal.getName()));
+    public String getUserInfo(Principal principal, Model model) {
+        model.addAttribute("usergetter", userService.findUserByUsername(principal.getName()));
         return "user-panel";
     }
 }

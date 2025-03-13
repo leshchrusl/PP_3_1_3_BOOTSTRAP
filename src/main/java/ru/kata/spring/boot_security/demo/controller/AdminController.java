@@ -29,8 +29,8 @@ public class AdminController {
 
     @GetMapping("")
     public String getAllUsers(Model model, Principal principal) {
-        model.addAttribute("alluser", userService.getAll());
-        model.addAttribute("userEmail", userService.findByUsername(principal.getName()));
+        model.addAttribute("alluser", userService.getAllUsers());
+        model.addAttribute("userEmail", userService.findUserByUsername(principal.getName()));
         model.addAttribute("newUser", new User());
         return "admin-panel";
     }
@@ -44,8 +44,8 @@ public class AdminController {
 
 
     @PostMapping("/edit/{id}")
-    public String edit(@ModelAttribute("newUser") User user, @RequestParam("listRoles") ArrayList<Long> roles, @PathVariable("id") long id) {
-        user.setRoles(roleService.findByIdRoles(roles));
+    public String editUser(@ModelAttribute("newUser") User user, @RequestParam("listRoles") ArrayList<Long> roles, @PathVariable("id") long id) {
+        user.setRoles(roleService.findRoleById(roles));
         userService.updateUser(user);
         return "redirect:/admin";
     }
@@ -54,7 +54,7 @@ public class AdminController {
     @PostMapping("/new")
     public String addNewUser(@ModelAttribute("newUser") User user,
                              @RequestParam("listRoles") ArrayList<Long> roles){
-        user.setRoles(roleService.findByIdRoles(roles));
+        user.setRoles(roleService.findRoleById(roles));
         userService.saveUser(user);
         return "redirect:/admin";
     }

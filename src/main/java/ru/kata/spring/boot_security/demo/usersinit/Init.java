@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.UsersInit;
+package ru.kata.spring.boot_security.demo.usersinit;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class Init {
     }
 
     @PostConstruct
-    public void init() {
+    public void initUsers() {
 
         Role adminRole = new Role(1L, "ADMIN");
         Role userRole = new Role(2L, "USER");

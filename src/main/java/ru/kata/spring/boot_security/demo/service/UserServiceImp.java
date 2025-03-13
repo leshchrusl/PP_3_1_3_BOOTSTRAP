@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImp implements UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -20,14 +21,12 @@ public class UserServiceImp implements UserService{
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Transactional
-    public List<User> getAll() {
-        return userRepository.getAll();
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
     }
 
-    @Transactional
-    public User getById(long id) {
-        return userRepository.getUser(id);
+    public User getUserById(long id) {
+        return userRepository.getUserById(id);
     }
 
     @Transactional
@@ -47,9 +46,7 @@ public class UserServiceImp implements UserService{
         userRepository.updateUser(user);
     }
 
-    @Transactional
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
-
 }

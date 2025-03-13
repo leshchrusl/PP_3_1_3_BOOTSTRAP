@@ -14,7 +14,7 @@ public class UserRepositoryImp implements UserRepository {
     private EntityManager entityManager;
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return entityManager.createQuery("select distinct a from User a left join fetch a.roles", User.class).getResultList();
     }
 
@@ -38,12 +38,12 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
-    public User getUser(long id) {
+    public User getUserById(long id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findUserByUsername(String username) {
         return entityManager.createQuery("select distinct a from User a left join fetch a.roles where a.username = :username", User.class)
                 .setParameter("username", username).getSingleResult();
     }
